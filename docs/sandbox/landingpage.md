@@ -10,7 +10,7 @@ import Card from '@site/src/components/Card'
 
 # UIC Sandbox
 
-A hands-on Sage cluster at UIC for learning, testing and breaking things safely.
+A hands-on Sage cluster at UIC for learning, testing and breaking things safely. Anyone with a Sage account can log in to one of 10 NVIDIA Jetson Thor blades, run AI code, and read live data from shared cameras and a weather station.
 
 <BrowserOnly>
   {() => {
@@ -33,8 +33,9 @@ A hands-on Sage cluster at UIC for learning, testing and breaking things safely.
   {[
     ['about', 'About', 'What the Sandbox is and why you would use it.'],
     ['getting-started', 'Getting Started', 'Create an account, add your SSH key, and run your first code.'],
-    ['nodes', 'Nodes', 'The UIC nodes and how to pick one.'],
-    ['sensors', 'Sensors', 'Cameras and devices on the lab network.'],
+    ['nodes', 'Nodes', 'The 10 Thor blades and how to pick one.'],
+    ['sensors', 'Sensors', 'Cameras and a weather station on the lab network.'],
+    ['projects', 'Projects', 'What students have built on Sage blades.'],
     ['guidelines', 'Guidelines', 'How to share the Sandbox fairly.'],
     ['faq', 'FAQ', 'Common questions about access, nodes, and sensors.'],
     ['get-help', 'Get Help', 'Where to ask when you are stuck.'],
