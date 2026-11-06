@@ -5,9 +5,13 @@ sidebar_position: 3
 
 # Nodes
 
-The Sandbox has 10 identical Thor blades. Any one of them will work for learning and testing.
+The Sandbox has 10 identical Thor-blades. Any one of them will work for learning and testing.
 
-![Inside a Sage Thor blade](../events/img/thor-blade.jpg)
+<img
+  src={require('../events/img/thor-blade.jpg').default}
+  alt="Inside a Sage Thor-blade"
+  style={{width: '100%', maxWidth: '640px', aspectRatio: '16 / 9', objectFit: 'cover', objectPosition: '50% 45%', display: 'block', margin: '1rem auto'}}
+/>
 
 ## The Sandbox nodes
 
@@ -30,21 +34,31 @@ You need an approved account and SSH keys before these commands work. See [Getti
 
 ## Hardware
 
-Every Sandbox node is a Sage Grande Testbed **Thor Blade DevKit** node: a 2U rack-mounted blade built around an NVIDIA Jetson Thor.
+Every Sandbox node is a Sage Grande Testbed **Thor-blade DevKit** node: a 2U rack-mounted blade built around an NVIDIA Jetson Thor.
 
-:::note[Thor Blade at a glance]
+### Computer: NVIDIA Jetson AGX Thor Developer Kit
 
-- **Computer:** NVIDIA Jetson AGX Thor (T5000 module)
+At the heart of each Thor-blade is an NVIDIA Jetson AGX Thor Developer Kit. These specs come from the Jetson Thor itself and are the same on any Thor dev kit:
+
+- **Module:** NVIDIA Jetson AGX Thor (T5000)
 - **CPU:** 14-core Arm Neoverse-V3AE
 - **GPU:** 2560-core NVIDIA Blackwell, with 96 Tensor Cores
 - **Memory:** 128 GB, shared by the CPU and GPU
+
+### Thor-blade features
+
+Sage builds the dev kit into a blade and adds the parts it needs to run as a node:
+
+:::note[Thor-blade at a glance]
+
+- **Form factor:** 2U rack-mounted blade
 - **Storage:** 4 TB NVMe
 - **Networking:** a built-in router; the blade runs its own private network for local sensors
 - **Power:** about 80 W on average, up to 150 W at peak; a network-controlled power unit lets the Sage team restart it remotely
 
 :::
 
-The DevKit version is meant for "rapid prototyping, model bring-up, and educational AI exploration." Read more about it on the [Next-Gen Nodes page](/labs/next-gen-nodes), or in the [Thor Blade deployment guide (PDF)](../manuals/SGT_Manual_ThorDev_Blade_V1.0.pdf).
+The DevKit version is meant for "rapid prototyping, model bring-up, and educational AI exploration." Read more about it on the [Next-Gen Nodes page](/labs/next-gen-nodes), or in the [Thor-blade deployment guide (PDF)](../manuals/SGT_Manual_ThorDev_Blade_V1.0.pdf).
 
 ## How to pick a node
 
@@ -54,9 +68,11 @@ There is no booking system. For now:
 - **Spread out.** If you're in a class or group, have each person start on a different node.
 - **Check before you start something big.** After you log in, run `who` to see who else is logged in, and `top` to see how busy the node is. If it's busy, try another one.
 
-:::caution[Your files stay on one node]
+:::warning[Your files stay on one node]
 
 Your home directory lives on the node you logged in to. If you switch to another node, your files won't be there. Stick to one node for a project, or copy your files with `scp`.
+
+Your files are also **not backed up**. A node can be reset or reimaged at any time, and anything on it may be lost. Keep a copy of anything important somewhere else, like your own computer or a Git repository.
 
 :::
 

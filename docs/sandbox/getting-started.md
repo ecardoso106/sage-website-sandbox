@@ -15,7 +15,7 @@ Go from zero to running your first code on a Sandbox node in six steps. Steps 1 
 
 ## 1. Create a Sage account
 
-<BrowserOnly>
+<!-- <BrowserOnly>
   {() => {
     const getUser = require('@site/src/components/getUsername').default;
     return getUser()
@@ -26,7 +26,7 @@ Go from zero to running your first code on a Sandbox node in six steps. Steps 1 
         </Button>
       );
   }}
-</BrowserOnly>
+</BrowserOnly> -->
 
 1. Go to the [Sage Portal](https://portal.sagecontinuum.org) (or click **Portal** in the top-right corner of [sagecontinuum.org](https://sagecontinuum.org)).
 2. Click **Sign In** in the top-right corner, create an account with your school credentials, and fill in the rest of your account details.
@@ -119,11 +119,11 @@ nvidia-smi
 
 ## 6. Read from a camera
 
-The Sandbox cameras are on the same network as the nodes, so you can open their video streams directly from your node. See [Sensors](./sensors) for the camera addresses and an example.
+The Sandbox cameras are on the same network as the nodes, so you can open their video streams directly from your node. See [Sensors](./sensors#cameras) for the stream addresses and an example.
 
 ## What next?
 
-- See what others have built in [Projects](./projects).
+- See what others have built in the [2026 Sage science projects](/science/category/2026).
 - Learn to package your code as a Sage app with the [Edge Apps tutorials](/docs/tutorials/edge-apps/intro-to-edge-apps).
 - Pull data from Sage nodes across the country with the [data API](/docs/tutorials/accessing-data).
 

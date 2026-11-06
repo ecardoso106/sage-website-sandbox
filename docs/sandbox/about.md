@@ -17,23 +17,23 @@ To learn more, read the [introduction to the Sage Testbed](/news/2024/01/10/sage
 
 ## What is the Sandbox?
 
-The UIC Sandbox is a set of 10 Sage Thor blades in a lab at UIC's [Electronic Visualization Laboratory (EVL)](https://www.evl.uic.edu/) in Chicago. It gives you a place to try new ideas, test new software, and explore sensors without disturbing nodes that are collecting real science data in the field.
+The UIC Sandbox is a set of 10 Sage Thor-blades in a lab at UIC's [Electronic Visualization Laboratory (EVL)](https://www.evl.uic.edu/) in Chicago. It gives you a place to try new ideas, test new software, and explore sensors without disturbing nodes that are collecting real science data in the field.
 
 ## Sandbox vs. field nodes
 
 | | Sandbox nodes | Field nodes |
 | --- | --- | --- |
-| Where | A lab at UIC EVL | Outdoors, at research sites across the country |
+| Where | A lab at UIC EVL | At research sites across the country |
 | Who can use them | Anyone with a Sage account and Sandbox access | Approved projects |
 | Sensors | Every node can reach every shared camera and sensor on the lab network | Each camera or sensor belongs to one node |
 | Good for | Learning, testing, experimenting | Long-running science |
-| If something breaks | No harm done | Real data can be lost |
+<!-- | If something breaks | No harm done | Real data can be lost | -->
 
 ## What you can do here
 
 - Log in to a real Sage node over SSH and explore Linux on an NVIDIA Jetson Thor.
 - Run AI models on a powerful edge GPU.
-- Read live video from shared cameras and data from a weather station.
+- Read live video from shared cameras (and soon, data from a weather station).
 - Try new software stacks before deploying them to field nodes.
 
 ## Who can use it
@@ -42,7 +42,7 @@ Anyone with a Sage account can use the Sandbox. Follow [Getting Started](./getti
 
 ## What's been built here
 
-Students at the [2026 Sage Summer Camp](/docs/events/2026-Sage-Summer-Hackathon) at EVL built AI projects on Sage blades, from bat detection to wildfire watch. See [Projects](./projects) for the full list.
+Students at the [2026 Sage Summer Camp](/docs/events/2026-Sage-Summer-Hackathon) at EVL built AI projects on Sage blades, from bat detection to wildfire watch. See the [2026 Sage science projects](/science/category/2026) for the full list.
 
 ---
 

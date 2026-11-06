@@ -19,32 +19,26 @@ Sandbox cameras point at objects, such as a screen or a fish tank, never at peop
 
 ## Cameras
 
-| Camera | Type | Address | Web page |
-| --- | --- | --- | --- |
-| Camera 1 | Reolink | `192.168.4.9` | [http://192.168.4.9](http://192.168.4.9) |
-| Camera 2 | Reolink | `192.168.4.10` | [http://192.168.4.10](http://192.168.4.10) |
+| Camera | Stream address |
+| --- | --- |
+| `evl-3` | `rtsp://media/camera/evl-3` |
+| `evl-4` | `rtsp://media/camera/evl-4` |
 
-Both cameras are on the `sage-hack` lab network with fixed (static) IP addresses. The web pages only open from a computer on that network, such as a Sandbox node.
+The cameras stream live video over RTSP through a media server on the lab network. Each camera has a short, friendly name, and you don't need a username or password to read its stream. The addresses only work from a Sandbox node.
 
 {/* TODO: add what each camera points at and a sample photo from each. */}
 
-### Logging in to a camera
-
-Sandbox users share one user login for the cameras. Ask for it in the Sage Slack (see [Get Help](./get-help)). Don't post it publicly.
-
-{/* TODO: decide where students get the shared camera user password. */}
-
 ### Grab a frame
 
-The cameras stream live video over RTSP. From a Sandbox node, save one frame to a picture file. Replace `USER` and `PASSWORD` with the shared camera login:
+From a Sandbox node, save one frame from each camera to a picture file:
 
 <Tabs>
   <TabItem value="ffmpeg" label="Command line (ffmpeg)" default>
 
 ```bash
-ffmpeg -rtsp_transport tcp \
-  -i "rtsp://USER:PASSWORD@192.168.4.9:554/h264Preview_01_main" \
-  -frames:v 1 frame.jpg
+mkdir -p cameras
+ffmpeg -i rtsp://media/camera/evl-3 -frames:v 1 cameras/evl-3.jpg
+ffmpeg -i rtsp://media/camera/evl-4 -frames:v 1 cameras/evl-4.jpg
 ```
 
   </TabItem>
@@ -53,14 +47,14 @@ ffmpeg -rtsp_transport tcp \
 ```python
 import cv2
 
-url = "rtsp://USER:PASSWORD@192.168.4.9:554/h264Preview_01_main"
+url = "rtsp://media/camera/evl-3"
 cap = cv2.VideoCapture(url)
 ok, frame = cap.read()
 cap.release()
 
 if ok:
-    cv2.imwrite("frame.jpg", frame)
-    print("Saved frame.jpg", frame.shape)
+    cv2.imwrite("evl-3.jpg", frame)
+    print("Saved evl-3.jpg", frame.shape)
 else:
     print("Could not read from the camera")
 ```
@@ -68,13 +62,13 @@ else:
   </TabItem>
 </Tabs>
 
-`h264Preview_01_main` is the full-quality stream. For a smaller, faster stream, use `h264Preview_01_sub` instead.
+To grab from the other camera, change `evl-3` to `evl-4`.
 
-{/* TODO: test both examples on a Sandbox node; confirm ffmpeg and OpenCV are installed, or add install steps. */}
+{/* TODO: test the OpenCV example on a Sandbox node (the ffmpeg commands were tested on H01D). */}
 
-## Weather station
+## Weather station <Chip label="Coming soon" size="small" />
 
-An **ES-642 Remote Dust Monitor** from Met One Instruments, set up and managed by the Sage team. Sandbox nodes can read its live data over the network.
+An **ES-642 Remote Dust Monitor** from Met One Instruments, set up and managed by the Sage team. It isn't available to Sandbox users yet. Once it is, Sandbox nodes will be able to read its live data over the network.
 
 **What it measures:**
 
@@ -91,63 +85,14 @@ An **ES-642 Remote Dust Monitor** from Met One Instruments, set up and managed b
 
 1. The ES-642 sends its readings over an RS-485 serial cable to an industrial Raspberry Pi (EDA ED-IPC2400).
 2. The Raspberry Pi runs [SerialMux](https://github.com/seanshahkarami/serialmux), which shares that serial data over the network on TCP port `20001`.
-3. Power and network reach the Raspberry Pi over a single Ethernet cable from the Thor blade, through a PoE injector and splitter.
-4. Any Sandbox node can connect to the Raspberry Pi on port `20001` and receive the live data, as if the sensor were plugged in directly.
+3. Power and network reach the Raspberry Pi over a single Ethernet cable from the Thor-blade, through a PoE injector and splitter.
+4. Any Sandbox node will be able to connect to the Raspberry Pi on port `20001` and receive the live data, as if the sensor were plugged in directly.
 
 For the full wiring and setup, see the [weather station setup guide](https://github.com/waggle-sensor/summer-camp-2026/blob/main/RPi-and-Sensors-Setup.md#weather-station-system-setup).
 
 ### Read the weather data
 
-Replace `WEATHER_STATION_IP` with the station's address.
-
-{/* TODO: add the weather station Raspberry Pi's IP address. */}
-
-<Tabs>
-  <TabItem value="nc" label="Command line (netcat)" default>
-
-```bash
-nc -C WEATHER_STATION_IP 20001
-```
-
-Data should start streaming in. If nothing appears, press **Enter** a few times until you see a `*` prompt, then type `S 1` to start sampling. Press **Ctrl+C** to quit.
-
-  </TabItem>
-  <TabItem value="python" label="Python">
-
-```python
-import socket
-
-HOST = "WEATHER_STATION_IP"
-PORT = 20001
-
-with socket.create_connection((HOST, PORT), timeout=30) as s:
-    f = s.makefile("r", encoding="ascii", errors="replace")
-    for _ in range(5):
-        print(f.readline().strip())
-```
-
-  </TabItem>
-</Tabs>
-
-<details>
-<summary>Useful ES-642 commands</summary>
-
-Type these at the `*` prompt:
-
-| Command | What it does |
-| --- | --- |
-| `S 1` | Start sampling |
-| `S 0` | Stop sampling |
-| `RQ` | Show the current measurement |
-| `OP` | Show the operation status |
-| `H` or `?` | Show the help menu |
-| `Q` or `X` | Leave command mode |
-
-</details>
-
-:::caution[It's a shared instrument]
-Everyone in the Sandbox reads the same weather station. Stick to the commands above, and don't run calibration or set-point commands (`CAL`, `RA`, `RF`, `RP`, `RR`, `AV`, `AR`, `SPR`, `SPA`).
-:::
+<Chip label="Coming soon" size="small" /> Instructions for reading the weather station from a Sandbox node will be added here once it's available.
 
 ## Coming soon
 

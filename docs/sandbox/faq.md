@@ -72,14 +72,7 @@ They run the same Sage software, but the Sandbox nodes are in a lab at UIC for l
 <details>
 <summary>How do I get video from a camera?</summary>
 
-The cameras stream over RTSP on the same network as the nodes. See [Sensors](./sensors#grab-a-frame) for a command-line and a Python example.
-
-</details>
-
-<details>
-<summary>Where do I get the camera login?</summary>
-
-Ask in the Sage Slack. See [Get Help](./get-help).
+The cameras stream over RTSP on the same network as the nodes, and no login is needed. See [Sensors](./sensors#grab-a-frame) for a command-line and a Python example.
 
 </details>
 

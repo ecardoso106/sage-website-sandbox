@@ -273,6 +273,9 @@ export default {
           }, {
             to: '/docs/node-installation-manuals',
             from: ['/docs/category/installation-manuals']
+          }, {
+            to: '/science/category/2026',
+            from: ['/docs/sandbox/projects']
           }
         ],
       },

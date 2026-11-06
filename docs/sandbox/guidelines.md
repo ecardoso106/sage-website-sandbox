@@ -22,8 +22,8 @@ The Sandbox nodes are shared, and there is no booking system: anyone with access
 
 - **Don't hog a node.** Avoid running heavy GPU jobs for hours when others may need the node.
 - **Don't point cameras at people.** The cameras are aimed at objects on purpose. Don't move or re-aim them.
-- **Don't change shared sensors.** Read from the weather station, but don't run its calibration or set-point commands.
-- **Don't share your credentials.** Your SSH keys and the camera login are for you only.
+- **Don't change shared sensors.** Once the weather station is available, read from it, but don't run its calibration or set-point commands.
+- **Don't share your credentials.** Your SSH keys are for you only.
 
 :::
 
