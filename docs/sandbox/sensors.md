@@ -14,19 +14,28 @@ The cameras and weather station you can use from the Sandbox, and how to read th
 On field nodes, each camera or sensor belongs to exactly one node. The Sandbox is different: the nodes and the cameras sit on the same lab network, so **every Sandbox node can reach every camera**.
 
 :::warning[Camera rule]
-Sandbox cameras point at objects, such as a screen or a fish tank, never at people. Please don't move or re-aim them.
+Sandbox cameras point at objects, such as a monitor or a poster, never at people. Please don't move or re-aim them.
 :::
 
 ## Cameras
 
-| Camera | Stream address |
-| --- | --- |
-| `evl-3` | `rtsp://media/camera/evl-3` |
-| `evl-4` | `rtsp://media/camera/evl-4` |
+| Camera | Stream address | What it shows |
+| --- | --- | --- |
+| `evl-cam-3` | `rtsp://media/evl-cam-3` | The bottom edge of an LG monitor and the cables under it (grayscale) |
+| `evl-cam-4` | `rtsp://media/evl-cam-4` | A research poster on edge audio sensing, with headphones in front (grayscale) |
+| `test-cam` | `rtsp://media/test-cam` | A virtual camera: a color test pattern with a steady 1 kHz tone |
 
 The cameras stream live video over RTSP through a media server on the lab network. Each camera has a short, friendly name, and you don't need a username or password to read its stream. The addresses only work from a Sandbox node.
 
-{/* TODO: add what each camera points at and a sample photo from each. */}
+`test-cam` isn't a real camera. It makes a test pattern and tone on demand, so it's a good way to check your code before you use the real cameras.
+
+:::note[Audio]
+Every stream has an audio track, but only `test-cam` has sound. The `evl-cam-3` and `evl-cam-4` audio tracks are silent.
+:::
+
+The camera list and where the cameras point may change. This page will be updated when they do.
+
+{/* TODO: add a sample photo from each camera. A camera/mic list with descriptions (cameras.txt) may be added on the nodes; link it here when it exists. */}
 
 ### Grab a frame
 
@@ -36,9 +45,8 @@ From a Sandbox node, save one frame from each camera to a picture file:
   <TabItem value="ffmpeg" label="Command line (ffmpeg)" default>
 
 ```bash
-mkdir -p cameras
-ffmpeg -i rtsp://media/camera/evl-3 -frames:v 1 cameras/evl-3.jpg
-ffmpeg -i rtsp://media/camera/evl-4 -frames:v 1 cameras/evl-4.jpg
+ffmpeg -i rtsp://media/evl-cam-3 -frames:v 1 evl-cam-3.jpg
+ffmpeg -i rtsp://media/evl-cam-4 -frames:v 1 evl-cam-4.jpg
 ```
 
   </TabItem>
@@ -47,14 +55,14 @@ ffmpeg -i rtsp://media/camera/evl-4 -frames:v 1 cameras/evl-4.jpg
 ```python
 import cv2
 
-url = "rtsp://media/camera/evl-3"
+url = "rtsp://media/evl-cam-3"
 cap = cv2.VideoCapture(url)
 ok, frame = cap.read()
 cap.release()
 
 if ok:
-    cv2.imwrite("evl-3.jpg", frame)
-    print("Saved evl-3.jpg", frame.shape)
+    cv2.imwrite("evl-cam-3.jpg", frame)
+    print("Saved evl-cam-3.jpg", frame.shape)
 else:
     print("Could not read from the camera")
 ```
@@ -62,9 +70,21 @@ else:
   </TabItem>
 </Tabs>
 
-To grab from the other camera, change `evl-3` to `evl-4`.
+Swap in `evl-cam-4` or `test-cam` to use another stream.
 
 {/* TODO: test the OpenCV example on a Sandbox node (the ffmpeg commands were tested on H01D). */}
+
+### Record a short clip
+
+Save a 3-second video, with its audio, from each stream:
+
+```bash
+ffmpeg -i rtsp://media/evl-cam-3 -t 3 evl-cam-3.mp4
+ffmpeg -i rtsp://media/evl-cam-4 -t 3 evl-cam-4.mp4
+ffmpeg -i rtsp://media/test-cam -t 3 test-cam.mp4
+```
+
+`-t 3` sets the length in seconds. `test-cam.mp4` will have the 1 kHz tone, so you can use it to check that your audio works too.
 
 ## Weather station <Chip label="Coming soon" size="small" />
 
